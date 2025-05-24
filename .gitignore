@@ -1,12 +1,22 @@
+# cache
 __pycache__/
+.mypy_cache/
+.cache/
+.ruff_cache/
+
+# python environment
+.env
+.venv
+.env/
+.venv/
+env*/
+venv*/
+
 *.pyc
 *.pyo
 *.pyd
 .env
 *.sqlite3
-.mypy_cache/
-.cache/
 .poetry/
 dist/
 *.egg-info/
-env*/
