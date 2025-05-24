@@ -9,5 +9,4 @@ __pycache__/
 .poetry/
 dist/
 *.egg-info/
-.env
 env*/
