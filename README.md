@@ -37,7 +37,7 @@ lab42/
 
 * Web-based interface for writing task evaluation
 * Uses GPT (or fallback LLMs) to provide structured feedback
-* Built with FastAPI and Tailwind UI
+* Built with FastAPI and Streamlit
 
 ## 🔁 Shared Packages
 
