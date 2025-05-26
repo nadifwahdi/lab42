@@ -105,9 +105,9 @@ make run-app        # Run a selected app (set default in Makefile)
 
 * [x] Monorepo structure
 * [x] Shared packages
-* [x] Docker support
-* [x] MLflow tracking
-* [x] LLM fallback logic
+* [ ] Docker support
+* [ ] MLflow tracking
+* [ ] LLM fallback logic
 
 
 ---
