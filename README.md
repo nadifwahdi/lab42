@@ -10,43 +10,66 @@ Feel free to explore!
 
 ---
 
-## 1. Repository Structure
+## 📦 Structure
 
 ```
-lab42/                      # Root directory
-├── lab42/                  # Main package directory containing all modules and work
-│   └── __init__.py         # Package initializer
-├── tests/                  # Unit tests for the modules inside lab42/
-├── env310/                 # Local environment directory (created after setup)
-├── pyproject.toml          # Project configuration and build metadata
-├── requirements.txt        # Required dependencies to run the code
-└── requirements_dev.txt    # Additional tools and packages for development
+lab42/
+├── apps/                   # Individual applications
+│   ├── ielts_tutor/        # GPT-powered IELTS writing tutor app (on progress...)
+│
+├── packages/               # Shared Python packages
+│   ├── llm/                # LLM clients, prompt handling, providers
+│   ├── core/               # Types, constants, error handling
+│   ├── utils/              # General-purpose utilities
+│   └── data/               # Data loading, preprocessing helpers
+│
+├── docker/                 # Docker-related files
+├── Makefile                # Useful commands
+├── setup.py                # Editable pip install of packages/
+└── README.md
 ```
 
 ---
 
-## 2. Getting Started
+## 🚀 Projects
 
-### 2.1 Clone the repository
+### 🧠 TOEFL Tutor (Coming soon)
+
+* Web-based interface for writing task evaluation
+* Uses GPT (or fallback LLMs) to provide structured feedback
+* Built with FastAPI and Tailwind UI
+
+## 🔁 Shared Packages
+
+### `llm/`
+
+* LLM base clients, OpenAI integration, prompt builders, fallbacks
+
+### `core/`
+
+* App-wide constants, errors, and shared types
+
+### `utils/`
+
+* Generic helpers like safe string casting, env loaders, logging
+
+## 🐳 Docker (Coming soon)
+
+Each app includes its own Dockerfile and can be run independently. See `/docker/` folder for templates and examples.
+
+## ⚙️ Setup
 
 ```bash
-git clone https://github.com/your-username/lab42.git
-cd lab42
-```
+# Clone the repo
+$ git clone https://github.com/nadiffw/lab42.git
+$ cd lab42
 
-### 2.2 Install dependencies
+# Create and activate virtual environment
+$ python3.10 -m venv env310
+$ source env310/bin/activate  # On Windows use `env310\Scripts\activate`
 
-Before installing dependencies, make sure that the virtual environment already activated:
-
-```bash
-python3.10 -m venv env310
-source env310/bin/activate
-```
-
-Then, install the dependencies using `pip`:
-
-```bash
-pip install -r requirements.txt
+# Install editable packages
+$ pip install -e .
 ```
 
 For development:
@@ -54,8 +77,6 @@ For development:
 ```bash
 pip install -r requirements_dev.txt
 ```
-
-### 2.3 Install and Set Up Pre-commit
 
 To ensure code quality and consistency, this project uses `pre-commit` hooks. You can install and activate them with the following commands:
 
@@ -72,6 +93,23 @@ Then apply `pre-commit` to all files
 pre-commit run --all-files
 ```
 
+## 🛠️ Make Commands
+
+```bash
+make install        # Install dependencies
+make lint           # Run linters
+make run-app        # Run a selected app (set default in Makefile)
+```
+
+## ✅ Status
+
+* [x] Monorepo structure
+* [x] Shared packages
+* [x] Docker support
+* [x] MLflow tracking
+* [x] LLM fallback logic
+
+
 ---
 
-More modules and documentation will be added over time. Stay tuned!
+Built for learning, showcasing, and scaling up experiments 💡
