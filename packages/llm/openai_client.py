@@ -6,7 +6,7 @@ from openai.types.responses import Response
 from utils.logging import initiate_logger
 
 from llm.base import LLMClientBase
-from llm.llm_utils import OPENAI_COST, LLMEngine
+from llm.llm_utils import LLMEngine, OpenAICost
 from llm.types import (
     JobInfo,
     JobInfoType,
@@ -92,8 +92,8 @@ class OpenAIClient(LLMClientBase):
         return response
 
     def __get_job_info(self, response: Response) -> JobInfo:
-        input_cost = OPENAI_COST[self.engine.params.model]
-        output_cost = OPENAI_COST[self.engine.params.model]
+        input_cost = getattr(OpenAICost, self.engine.params.model).input
+        output_cost = getattr(OpenAICost, self.engine.params.model).output
         input_tokens = response.usage.input_tokens
         output_tokens = response.usage.output_tokens
         total_tokens = response.usage.total_tokens

@@ -7,7 +7,7 @@ from google.genai.types import GenerateContentResponse
 from utils import initiate_logger
 
 from llm.base import LLMClientBase
-from llm.llm_utils import GEMINI_COST, LLMEngine
+from llm.llm_utils import GeminiCost, LLMEngine
 from llm.types import (
     JobInfo,
     JobInfoType,
@@ -104,8 +104,8 @@ class GeminiClient(LLMClientBase):
         return response
 
     def __get_job_info(self, response: GenerateContentResponse) -> JobInfo:
-        input_cost = GEMINI_COST[self.engine.params.model]
-        output_cost = GEMINI_COST[self.engine.params.model]
+        input_cost = getattr(GeminiCost, self.engine.params.model).input
+        output_cost = getattr(GeminiCost, self.engine.params.model).output
         input_tokens = response.usage_metadata.prompt_token_count
         output_tokens = response.usage_metadata.candidates_token_count
         total_tokens = response.usage_metadata.total_token_count
