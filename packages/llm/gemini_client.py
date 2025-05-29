@@ -104,8 +104,11 @@ class GeminiClient(LLMClientBase):
         return response
 
     def __get_job_info(self, response: GenerateContentResponse) -> JobInfo:
-        input_cost = getattr(GeminiCost, self.engine.params.model).input
-        output_cost = getattr(GeminiCost, self.engine.params.model).output
+        model_name = (
+            self.engine.params.model.upper().replace("-", "_").replace(".", "_")
+        )
+        input_cost = getattr(GeminiCost, model_name).input
+        output_cost = getattr(GeminiCost, model_name).output
         input_tokens = response.usage_metadata.prompt_token_count
         output_tokens = response.usage_metadata.candidates_token_count
         total_tokens = response.usage_metadata.total_token_count

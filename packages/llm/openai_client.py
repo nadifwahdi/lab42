@@ -92,8 +92,11 @@ class OpenAIClient(LLMClientBase):
         return response
 
     def __get_job_info(self, response: Response) -> JobInfo:
-        input_cost = getattr(OpenAICost, self.engine.params.model).input
-        output_cost = getattr(OpenAICost, self.engine.params.model).output
+        model_name = (
+            self.engine.params.model.upper().replace("-", "_").replace(".", "_")
+        )
+        input_cost = getattr(OpenAICost, model_name).input
+        output_cost = getattr(OpenAICost, model_name).output
         input_tokens = response.usage.input_tokens
         output_tokens = response.usage.output_tokens
         total_tokens = response.usage.total_tokens
