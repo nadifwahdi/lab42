@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 
+from llm.types import JobType
+
 
 class LLMClientBase(ABC):
     @abstractmethod
-    def call_request(self, job_name: str) -> Any:
+    def call_request(self, job_name: JobType) -> Any:
         """
         Execute a request to the LLM with specified input and parameters.
 
