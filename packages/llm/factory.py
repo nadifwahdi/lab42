@@ -1,22 +1,30 @@
 import os
 from typing import Optional
 
-from llm.openai_client import OpenAIClient
+from llm import gemini_client, openai_client
+from llm.llm_utils import LLMEngine, load_llm_params_from_yaml
 from llm.prompt import ExamplePrompt
 from llm.types import Prompt
-from llm.utils import LLMEngine, load_llm_params_from_yaml
 
 load_llm_params_from_yaml()
 
 
 def load_llm_client(
+    api_key: str,
     prompt: Prompt = ExamplePrompt.grammar_checker_prompt,
     provider: Optional[str] = None,
 ) -> object:
 
     provider = provider or os.getenv("PROVIDER", "openai").lower()
-    prompt
     if provider == "openai":
-        return OpenAIClient(engine=LLMEngine(), prompt=prompt)
+        return openai_client.OpenAIClient(
+            engine=LLMEngine(), prompt=prompt, openai_api_key=api_key
+        )
+    elif provider == "gemini":
+        return gemini_client.GeminiClient(
+            engine=LLMEngine(), prompt=prompt, gemini_api_key=api_key
+        )
     else:
-        raise ValueError(f"Client for {provider} is not available!")
+        raise ValueError(
+            f"Client for {provider if provider else 'NONE'} is not available!"
+        )
